@@ -4,7 +4,11 @@ $myfun = new Customers();
 if (isset($_POST['singin'])) {
     $email = $myfun->dbConn->real_escape_string($_POST['email_id']);
     $pass = $myfun->dbConn->real_escape_string($_POST['password']);
-    $myfun->login($email, $pass);
+  if ($myfun->login($email, $pass)) {
+        // Redirect to home page on successful login
+        header("Location: index.php");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -34,7 +38,7 @@ if (isset($_POST['singin'])) {
     <div class="container-fluid">
 
 
-        <form action="" method="post" onsubmit="validateform()" novalidate>
+        <form action="" method="post"  novalidate>
             <div class="user_img">
                 <i class="fa-solid fa-user"></i>
             </div>
@@ -83,6 +87,7 @@ if (isset($_POST['singin'])) {
         //         $(".loaderMainContainer").css("display", "inline-block");
         //     });
         // });
+
     </script>
 </body>
 

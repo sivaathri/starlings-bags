@@ -1,5 +1,5 @@
 
-function validateform() {
+function validateform(event) {
 
 
     var form = document.querySelector('form');
@@ -11,8 +11,8 @@ function validateform() {
 
     }
     else {
-        // const email = document.getElementById("email")
-        // const password = document.getElementById("password")
+      const email = document.getElementById("email")
+        const password = document.getElementById("password")
         
         const Data = []
         const emmail = email.value
@@ -24,7 +24,7 @@ function validateform() {
 
 
         if (remember.checked) {
-            // window.location.reload()
+           window.location.reload()
             localStorage.setItem("Data", JSON.stringify(Data));
         }
 
