@@ -13,6 +13,7 @@ class Admincrud extends Customers
     public $ordertable = "quotation_info_tbl";
     public $ratingtabel = "rating_tbl";
     public $contactTable = "contact_tbl";
+    public $EnquiryTable = "enquiry_request";
     private $uploadDir;
     private $categoryDir;
     public function __construct()
@@ -1496,6 +1497,32 @@ class Admincrud extends Customers
     //     }
 
     // }
+
+    public function getEnquiryTable()
+
+    {
+
+
+        $sql = "SELECT * FROM `enquiry_request` ORDER BY `id` DESC;";
+
+
+
+            // echo $sql;
+
+            $runsql = $this->dbconn->query($sql);
+
+            if ($runsql->num_rows > 0) {
+
+                return $runsql;
+
+            } else {
+
+                return false;
+
+            }
+
+    }
+    
 
 }
 

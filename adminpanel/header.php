@@ -94,11 +94,20 @@ $orderCount =  $classobj->newOrderCount();
         <div class="menu-bar">
             <div class="menu-links">
                 <ul>
+                    
                     <li>
                         <a href="dashboard" class="menu-link">
                             <div class="sidebar-menu-li">
                                 <i id="menu-icon" class="fa-solid fa-gauge"></i>
                                 <span class="menu-link-name">Dashboard</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inbox" class="menu-link">
+                            <div class="sidebar-menu-li">
+                                <i id="menu-icon" class="fa-solid fa-gauge"></i>
+                                <span class="menu-link-name">Inbox</span>
                             </div>
                         </a>
                     </li>

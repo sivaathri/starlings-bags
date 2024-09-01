@@ -6,7 +6,7 @@ if (isset($_POST['singin'])) {
     $pass = $myfun->dbConn->real_escape_string($_POST['password']);
   if ($myfun->login($email, $pass)) {
         // Redirect to home page on successful login
-        header("Location: index.php");
+        header("Location: ./adminpanel/home.php");
         exit();
     }
 }

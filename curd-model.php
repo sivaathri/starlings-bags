@@ -91,6 +91,38 @@ class Customers extends db
         }
     }
 
+    // public function email($name, $mail_id, $phno, $msg)
+    // {
+    //     $mailer = new PHPMailer(true);
+    
+    //     try {
+    //         // Server settings
+    //         $mailer->isSMTP();
+    //         $mailer->Host       = 'smtp.gmail.com';
+    //         $mailer->SMTPAuth   = true;
+    //         $mailer->Username   = 'sivaathriaahasolutions@gmail.com';
+    //         $mailer->Password   = 'yrkt ghwt jaie eman'; // Use an app password, not your regular password
+    //         $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    //         $mailer->Port       = 587;
+    
+    //         // Recipients
+    //         $mailer->setFrom('sivaathriaahasolutions@gmail.com', 'Your Name');
+    //         $mailer->addAddress($mail_id);
+    
+    //         // Content
+    //         $mailer->isHTML(true);
+    //         $mailer->Subject = 'New Contact Form Submission';
+    //         $mailer->Body    = "Name: $name<br>Email: $mail_id<br>Phone: $phno<br>Message: $msg";
+    //         $mailer->AltBody = "Name: $name\nEmail: $mail_id\nPhone: $phno\nMessage: $msg";
+    
+    //         // Send email
+    //         $mailer->send();
+    //         return true;
+    //     } catch (Exception $e) {
+    //         return "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
+    //     }
+    // }
+
     public function email($name, $mail_id, $phno, $msg)
     {
 
@@ -107,25 +139,24 @@ class Customers extends db
         $adminMailId = $this->getAppContactInfo();
         try {
             //Server settings
-            // $mailer->SMTPDebug = 10;                      //Enable verbose debug output
-            $mailer->isMail();                                            //Send using SMTP
-            $mailer->Host       = 'localhost';                    //Set the SMTP server to send through
-            $mailer->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mailer->Username   = 'info@starlingbagsni.co.uk';                     //SMTP username
-            $mailer->Password   = 'starlingbagsni.co.uk';
-            $mailer->SMTPSecure = 'tls';                                 //SMTP password
-            //$mailer->SMTPSecure = 'tls';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mailer->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+    //         // Server settings
+            $mailer->isSMTP();
+            $mailer->Host       = 'smtp.gmail.com';
+            $mailer->SMTPAuth   = true;
+            $mailer->Username   = 'sivaathriaahasolutions@gmail.com';
+            $mailer->Password   = 'yrkt ghwt jaie eman'; // Use an app password, not your regular password
+            $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mailer->Port       = 587;
 
             //Recipients
-            $mailer->setFrom('info@starlingbagsni.co.uk', 'admin');
+            $mailer->setFrom('sivaathriaahasolutions@gmail.com', 'admin');
             $mailer->addAddress($adminMailId['contact_mail'], 'Admin');     //Add a recipient
             //$mailer->addReplyTo('your_email@gmail.com', 'admin');
-
+            
             //Attachments (optional)
             // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachmentshttp://localhost/DJ-BAGS/forgotpassword.php
             // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
+            
             //Content
             $mailer->isHTML(true);                                  //Set email format to HTML
             $mailer->Subject = 'Contact Request From Customers';
