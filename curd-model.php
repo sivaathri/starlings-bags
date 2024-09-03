@@ -453,7 +453,7 @@ class Customers extends db
         }
     }
 
-    public function getAppContactInfo()
+public function getAppContactInfo()
     {
         $sql = "SELECT * FROM " . $this->contact_tbl;
         $query = $this->dbConn->query($sql);
@@ -466,4 +466,6 @@ class Customers extends db
             }
         }
     }
+
+
 }

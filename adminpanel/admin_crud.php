@@ -1523,6 +1523,38 @@ class Admincrud extends Customers
 
     }
     
-
+    // public function deleteEnquiryById($enquiryId) {
+    //     // Your database deletion logic goes here...
+    //     // Return true if deletion is successful, false otherwise
+    //     // For example:
+    //     $sql = "DELETE FROM `enquiry_request` WHERE id = '$enquiryId'";
+    //     if (mysqli_query($this->conn, $sql)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    //     // $sql = "DELETE FROM `enquiry_request` WHERE id = ?";
+    //     // $stmt = mysqli_query($this->conn, $sql);
+    //     // mysqli_stmt_bind_param($stmt, "i", $enquiryId);
+    //     // mysqli_stmt_execute($stmt);
+    //     // $result = mysqli_stmt_affected_rows($stmt);
+    //     // mysqli_stmt_close($stmt);
+    //     // return $result > 0;
+    // }
+    public function deleteEnquiryById($id) {
+        $query = "DELETE FROM " . $this->EnquiryTable . " WHERE id = '$id'";
+        if ($this->dbconn) {
+            $result = $this->dbconn->query($query);
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            // Handle the error
+            return false;
+        }
+    }
+    
 }
 

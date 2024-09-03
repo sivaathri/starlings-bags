@@ -206,17 +206,20 @@ if (!$productData) {
                         </thead>
                         <tbody>
                             <?php
+                            $enquiry_id = '';
                             if (!$enquiryData) {
                                 echo '<tr><td colspan="4">There is no orders Placed</tr></td>';
                             } else {
                                 $i = 1;
                                 foreach ($enquiryData as $row) {
-                                    echo '<tr>
+                                    $enquiryId = isset($row["id"]) ? $row["id"] : '';
+                                    echo '<tr id="row-'.$enquiryId .'">
                                     <td style="min-width:150px;"><a href="order_details?orderid=' . $i. '" class="link-dark">' . $i . '</a></td>
                                     <td style="max-width:200px; min-width:100px; word-wrap: break-word;">' . $row["ctc_person_name"] . '</td>
                                     <td>' . $row["ctc_person_email"] . '</td>
                                     <td>' . $row["ctc_person_phno"] . '</td>
                                     <td>' . $row["ctc_person_msg"] . '</td>
+                                <td><button class="delete-btn btn btn-danger" data-id="' .  (isset($row["id"]) ? $row["id"] : '')  .  '">Delete</button></td>
                                 </tr>';
                                 $i = $i + 1;
                                 }
@@ -240,6 +243,51 @@ $(document).ready(function(){
         });
     });
 });
+$(document).ready(function() {
+    $("#productTable").on("click", ".delete-btn", function() {
+        var enquiryId = $(this).data("id");
+        var row = $(this).closest('tr');
+
+        // Confirm before deleting
+        if (confirm("Are you sure you want to delete this enquiry?")) {
+            // Disable the button to prevent multiple clicks
+            $(this).prop('disabled', true);
+
+            // Send AJAX request to delete the entry
+            $.ajax({
+                url: 'delete_enquiry.php',
+                type: 'POST',
+                data: { id: enquiryId },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    if (response.status === 'success') {
+                        row.fadeOut(400, function() {
+                            $(this).remove();
+                        });
+                        toastr.success('Enquiry deleted successfully');
+            // Delay the page reload by 2 seconds
+            setTimeout(function() {
+                window.location.reload();
+            }, 2000); // 2000 milliseconds = 2 seconds
+                    } else {
+                        toastr.error('Failed to delete enquiry: ' + (response.message || 'Unknown error'));
+                        // Re-enable the button on failure
+                        row.find('.delete-btn').prop('disabled', false);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: " + status + " - " + error);
+                    toastr.error('An error occurred while deleting the enquiry');
+                    // Re-enable the button on error
+                    row.find('.delete-btn').prop('disabled', false);
+                }
+            });
+        }
+    });
+});
+
+
 </script>
 
 </html>
